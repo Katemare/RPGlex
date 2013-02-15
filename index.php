@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: text/html; charset=utf-8');
 define('PATH_ROOT', $_SERVER['DOCUMENT_ROOT'].'/');
 define('SMARTY_DIR', PATH_ROOT.'smarty/');
 require_once SMARTY_DIR.'Smarty.class.php';

@@ -1,0 +1,10 @@
+[database]
+host=localhost
+user=root
+password=mysqlgfhjkm
+database=simple_static_engine
+
+[pagination]
+items=10
+
+

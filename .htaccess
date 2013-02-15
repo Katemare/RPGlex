@@ -1,0 +1,13 @@
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)(\.(php|html))?$ index.php?request_path=$1 [L,QSA]
+ 
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)(\.(php|html))?$ index.php?request_path=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} !(\.js$|\.png$|\.jpg$|\.gif|\.css$)
+RewriteRule ^(.*)(\.(php|html))?$ index.php?request_path=$1 [L,QSA]

@@ -1,0 +1,4 @@
+<?php
+    $sql = "DELETE FROM translate_variants WHERE id=".$_REQUEST['id'];
+    $database->exec_query($sql);
+?>

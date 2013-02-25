@@ -26,12 +26,61 @@ function ajax(url) {
     return '';
 }
 
-function get_comments(term_id, container_id) {    
-    $('#'+container_id).html(ajax('/get_comments?term_id=' + term_id));
+function renew_comments(term, container) 
+{
+    var c = $('#' + container);
+    c.html(ajax('/get_comments?term_id='+term));
+    c.css('display', 'block');
+    
 }
 
-function add_comment(term_id, text) {
-    ajax('/add_comment?term_id=' + term_id + '&text=' + text);
-    get_comments(term_id, 'comments_container_'+term_id);
+function show_hide(container) {    
+    var c = $('#' + container);
+    if (c.css('display') == 'none') {
+        c.css('display', 'block');
+    } else {
+        c.css('display', 'none');
+    }
+    
+}
+
+function show_hide_comments(term, container)
+{
+    var c = $('#' + container);
+    if (c.css('display') == 'none') {
+        renew_comments(term, container);
+    } else {
+        c.html('');
+        c.css('display', 'none');
+    }
+}
+
+function add_comment(term, text)  {
+    ajax('add_comment?term_id=' + term + '&text=' + text);
+    renew_comments(term, 'term_' + term + '_comments_container');
+}
+
+function renew_variants(term, container)
+{   
+    var c = $('#' + container);
+    c.html(ajax('/variants?term_id='+term));
+    c.css('display', 'block');
+}
+
+function show_hide_variants(term, container)
+{   
+    var c = $('#' + container);
+    if (c.css('display') == 'none') {
+        renew_variants(term, container);
+    } else {
+        c.html('');
+        c.css('display', 'none');
+    }
+}
+
+function add_variant(term, text)
+{
+    ajax('/add_variant?term_id=' + term + '&text=' + text);
+    renew_variants(term, 'term_' + term + '_variants_container');
 }
 

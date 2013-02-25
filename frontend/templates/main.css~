@@ -1,0 +1,11 @@
+.inline_form {
+    display:inline;
+}
+
+.category_edit_block {
+    margin:15px
+}
+
+.field_block {
+    margin-left:25px
+}

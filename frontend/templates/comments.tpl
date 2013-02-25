@@ -1,5 +1,5 @@
 <table>
-<tr><th>Comments</th></tr>
+<caption> <b>Comments </b></caption>
 {foreach from=$comments item=comment}
 <tr><td>-- {$comment.text}</td></tr>
 {/foreach}

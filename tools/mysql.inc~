@@ -12,6 +12,7 @@ class Mysql {
                                           $settings['database']['user'],
                                           $settings['database']['password']);
         if (!$this->connection) die ('cant connect to mysql server');
+        mysql_set_charset('utf8', $this->connection);
         mysql_select_db($settings['database']['database'], $this->connection);
     }
     
@@ -34,7 +35,6 @@ class Mysql {
         $fields_part = join(',', $this->make_escaped_fieds($fields));
         $values_part = join(",", $this->make_escaped_values($values));
         $sql .= '('.$fields_part.') VALUES ('.$values_part.')';
-        var_dump($sql);
         return $this->exec_query($sql);
     }
         

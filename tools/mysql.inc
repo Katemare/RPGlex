@@ -12,6 +12,7 @@ class Mysql {
                                           $settings['database']['user'],
                                           $settings['database']['password']);
         if (!$this->connection) die ('cant connect to mysql server');
+        mysql_set_charset('utf8', $this->connection);
         mysql_select_db($settings['database']['database'], $this->connection);
     }
     

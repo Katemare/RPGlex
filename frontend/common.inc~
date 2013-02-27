@@ -29,7 +29,7 @@ if (isset($_REQUEST['category'])) {
     $terms[$cat_id]['category_name'] = $cats[0]['name'];
     $cats_fields = $database->select_from_table(array('id', 'name'), 'category_fields', array('category_id' => $cats[0]['id']));
     $terms[$cat_id]['fields'] = $cats_fields;
-    $termslist = $database->select_from_table(array('id', 'english', 'russian','page'), 'terms', array('category_id' => $cat_id));
+    $termslist = $database->select_from_table(array('id', 'english', 'russian','page'), 'terms', array('category_id' => $cat_id), 'english');
     foreach($termslist as $row) {
 //         $terms[$cat_id]['terms'][$row['term_id']]
         $terms[$cat_id]['terms'][$row['id']]['english'] = $row['english'];
@@ -66,7 +66,7 @@ if (isset($_REQUEST['category'])) {
     foreach($term_fields as $field) {
         $terms[$field['category_id']]['terms'][$field['term_id']]['fields'][$field['field_id']] = $field['value'];
     }
-    var_dump($terms);
+//     var_dump($terms);
 }
 
 $TemplateEngine->assign('terms', $terms);

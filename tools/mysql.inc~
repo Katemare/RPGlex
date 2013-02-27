@@ -38,9 +38,9 @@ class Mysql {
         return $this->exec_query($sql);
     }
         
-    public function select_from_table($fields, $table, $filter)
+    public function select_from_table($fields, $table, $filter, $sort = '')
     {
-        return $this->exec_query($this->prepare_select_query($fields, $table, $filter));
+        return $this->exec_query($this->prepare_select_query($fields, $table, $filter, $sort));
     }
     
     public function get_records_with_pagination($fields, $table, $filter, $sort_clause = '', $page = 0)
@@ -109,11 +109,14 @@ class Mysql {
         return $escaped_filter;
     }
     
-    private function prepare_select_query($fields, $table, $filter)
+    private function prepare_select_query($fields, $table, $filter, $sort)
     {        
         $escaped_fields = $this->make_escaped_fieds($fields);
         $escaped_filter = $this->make_escaped_filter($filter);
         $sql = 'SELECT '.join(',', $escaped_fields).' FROM `'.$table.'` WHERE '.join(' AND ', $escaped_filter);
+        if (!empty($sort)) {
+            $sql .= ' ORDER BY '.mysql_real_escape_string($sort, $this->connection);
+        }
         return $sql;
     }
 

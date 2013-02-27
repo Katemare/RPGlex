@@ -19,17 +19,23 @@ if(!empty($record)) {
 $categories = $database->select_from_table(array('id', 'name'), 'term_categories', array());
 $TemplateEngine->assign('categories', $categories);
 if(isset($_REQUEST['category'])) {
-$TemplateEngine->assign('current_category', $_REQUEST['category']);
+    $TemplateEngine->assign('current_category', $_REQUEST['category']);
 }
 
 $terms = array();
+$sortby = '';
+if (empty($_REQUEST['sort'])) {
+    $sortby = 'english';
+} else {
+    $sortby = $_REQUEST['sort'];
+}
 if (isset($_REQUEST['category'])) {
     $cats = $database->select_from_table(array('id', 'name'), 'term_categories', array('id' => $_REQUEST['category']));
     $cat_id = $cats[0]['id'];
     $terms[$cat_id]['category_name'] = $cats[0]['name'];
     $cats_fields = $database->select_from_table(array('id', 'name'), 'category_fields', array('category_id' => $cats[0]['id']));
     $terms[$cat_id]['fields'] = $cats_fields;
-    $termslist = $database->select_from_table(array('id', 'english', 'russian','page'), 'terms', array('category_id' => $cat_id), 'english');
+    $termslist = $database->select_from_table(array('id', 'english', 'russian','page'), 'terms', array('category_id' => $cat_id), $sortby);
     foreach($termslist as $row) {
 //         $terms[$cat_id]['terms'][$row['term_id']]
         $terms[$cat_id]['terms'][$row['id']]['english'] = $row['english'];
@@ -46,7 +52,7 @@ if (isset($_REQUEST['category'])) {
     }
 } else {
     $categories = $database->select_from_table(array('id', 'name'), 'term_categories', array());
-    $all_terms  = $database->select_from_table(array('id', 'category_id', 'english', 'russian', 'page'), 'terms', array(), 'english');
+    $all_terms  = $database->select_from_table(array('id', 'category_id', 'english', 'russian', 'page'), 'terms', array(), $sortby);
     $cat_fields = $database->select_from_table(array('id', 'category_id', 'name'), 'category_fields', array());
     $sql = 'SELECT term_fields.field_id as field_id, term_fields.term_id as term_id, '
             .'term_fields.value as value, category_fields.category_id as category_id '

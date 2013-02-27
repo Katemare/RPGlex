@@ -1,4 +1,11 @@
 <div class="content">
+<div>
+{if isset($current_category)} {$category_link = "category=$current_category&"} {else} {$category_link = ''} {/if}
+Sort by: 
+<a href="/?{$category_link}sort=english">English names</a>
+<a href="/?{$category_link}sort=russian">Russian names</a>
+<a href="/?{$category_link}sort=page">Page field</a>
+</div>
 <div class="display_category_block">
 {foreach from=$terms item=category key=category_id}
     <table>

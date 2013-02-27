@@ -1,7 +1,7 @@
-<div>
+<div class="content">
 <div class="display_category_block">
 {foreach from=$terms item=category key=category_id}
-    <table border="1">
+    <table>
         <caption>{$category.category_name}</caption>
         <tr>
             <th> Enlgish </th>
@@ -13,8 +13,10 @@
                 {/foreach}
             {/if}
         </tr>
-        {foreach from=$category.terms key=term_id item=term}
-        <tr>
+        {if !empty($category.terms)}
+        {foreach from=$category.terms key=term_id item=term name=term_foreach}
+        {if $smarty.foreach.term_foreach.index % 2} {$row_class = "row-odd"} {else} {$row_class = "row-even"} {/if}
+        <tr class="{$row_class}">
             <td> {$term.english} &nbsp;</td>
             <td> {$term.russian} &nbsp;</td>
             <td> {$term.page} &nbsp;</td>
@@ -59,6 +61,7 @@
             </td>
         </tr>
         {/foreach}
+        {/if}
     </table>
         <input type="button" value="Add new term" onclick="$('#add_category_form_{$category_id}').css('display', 'block');$(this).css('display', 'none');" />
         <form id="add_category_form_{$category_id}" action="/add_term" method="post" style="display:none" >
@@ -77,38 +80,4 @@
         </form>
 {/foreach}
 </div>
-
-
-
-
-<!--<table border="1">
-    <tr><th>English</th><th>Russian</th><th>Page</th></tr>
-    {foreach from=$terms item=term}
-        <tr>
-            <td>{$term.english}</td>
-            <td>{$term.russian}</td>
-            <td>{$term.page}</td>
-            <td> <input type="button" value="Edit term" onclick="$('#edit_term_{$term.id}').css('display', 'table-row');" />
-            <td> <input type="button" value="Show comments" onclick="get_comments( {$term.id}, 'comments_container_{$term.id}')" />
-            <td> <input type="button" value="Hide comments" onclick="$('#comments_container_{$term.id}').html('');" />
-        </tr>
-        <tr style="display:none" id="edit_term_{$term.id}">
-            <td colspan=6>
-                <form action="/edit_term" method="post">
-                    <label> English: <input type="text" name="english" value="{$term.english}"/> </label>
-                    <Label> Russian: <input type="text" name="russian" value="{$term.russian}"/> </label>
-                    <Label> Page: <input type="text" name="page" value="{$term.page}"/> </label>
-                    <input type="hidden" name="current_category" value="{$current_category}" />                
-                    <input type="hidden" name="term_id" value="{$term.id}" />      
-                    <input type="submit" value="Save" name="edit_term_submit" />
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td colspan=5><div id="comments_container_{$term.id}" /></td>
-        </tr>
-    {/foreach}
-</table>-->
-
-
 </div>

@@ -16,6 +16,11 @@ class Mysql {
         mysql_select_db($settings['database']['database'], $this->connection);
     }
     
+    public function escape_string($string) 
+    {
+        return mysql_real_escape_string($string, $this->connection);
+    }
+    
     public function exec_query($sql) 
     {        
         $mysql_res = mysql_query($sql, $this->connection);

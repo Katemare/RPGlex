@@ -12,7 +12,7 @@ if (isset($_REQUEST['edit_term_submit'])) {
                 $_REQUEST['term_id']
                 );
         $id = $_REQUEST['term_id'];
-        $database->exec_query('DELETE FROM term_fields WHERE term_id='.$_REQUEST['term_id']);
+        $database->exec_query('DELETE FROM term_fields WHERE term_id='.escape($_REQUEST['term_id']));
         foreach($_REQUEST['fields'] as $field_id => $value) {
             $database->insert_into_table( 'term_fields',
                 array('term_id', 'field_id', 'value'),

@@ -20,8 +20,6 @@ $categories = $database->select_from_table(array('id', 'name'), 'term_categories
 $TemplateEngine->assign('categories', $categories);
 if(isset($_REQUEST['category'])) {
     $TemplateEngine->assign('current_category', $_REQUEST['category']);
-} else {
-    $TemplateEngine->assign('current_category', '');
 }
 
 $terms = array();
@@ -29,7 +27,7 @@ $sortby = '';
 if (empty($_REQUEST['sort'])) {
     $sortby = 'english';
 } else {
-    $sortby = $_REQUEST['sort'];
+    $sortby = escape($_REQUEST['sort']);
 }
 if (isset($_REQUEST['category'])) {
     $cats = $database->select_from_table(array('id', 'name'), 'term_categories', array('id' => $_REQUEST['category']));
@@ -47,7 +45,7 @@ if (isset($_REQUEST['category'])) {
     $sql = 'SELECT term_fields.id as id, term_fields.term_id as term_id, term_fields.field_id as cat_field_id, value
             FROM term_fields LEFT JOIN terms ON term_fields.term_id = terms.id
             LEFT JOIN term_categories ON terms.category_id = term_categories.id 
-            WHERE term_categories.id ='.$_REQUEST['category'];    
+            WHERE term_categories.id ='.escape($_REQUEST['category']);    
     $fieldslist = $database->exec_query($sql);
     foreach($fieldslist as $field) {
         $terms[$cat_id]['terms'][$field['term_id']]['fields'][$field['cat_field_id']] = $field['value'];

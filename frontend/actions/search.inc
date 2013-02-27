@@ -1,7 +1,7 @@
 <?php
 
     if (isset($_REQUEST['search_submit'])) {
-        $query = $_REQUEST['query'];
+        $query = escape($_REQUEST['query']);
         $sql = 'SELECT russian, english, term_categories.name as category '.
                'FROM terms, term_categories '.
                'WHERE terms.category_id=term_categories.id AND (russian LIKE \'%'.$query.'%\' OR english LIKE \'%'.$query.'%\') ';        

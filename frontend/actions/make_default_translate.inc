@@ -1,6 +1,6 @@
 <?php
 
-    $sql = 'UPDATE terms SET `russian`=\''.$_REQUEST['text'].'\' WHERE id='.$_REQUEST['id'];
+    $sql = 'UPDATE terms SET `russian`=\''.escape($_REQUEST['text']).'\' WHERE id='.escape($_REQUEST['id']);
     $database->exec_query($sql);
 
 ?>

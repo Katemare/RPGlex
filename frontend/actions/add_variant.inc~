@@ -1,4 +1,0 @@
-<?php
-    $database->insert_into_table('tranlate_variants', array('term_id', 'value'), 
-                                 array($_REQUEST['term_id'], $_REQUEST['text']));
-?>

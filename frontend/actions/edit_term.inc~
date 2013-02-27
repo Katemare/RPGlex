@@ -20,6 +20,9 @@ if (isset($_REQUEST['edit_term_submit'])) {
                 );
         }
 }
-change_location($_SERVER['REFFERER']);
-
+if (isset($_REQUEST['current_category'])) {
+    change_location('/?category='.$_REQUEST['current_category']);
+} else {
+    change_location('/');
+}
 ?>

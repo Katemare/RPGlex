@@ -17,11 +17,9 @@ if (isset($_REQUEST['add_term_submit'])) {
         }
     }
 }
-die();
-// if (isset($_REQUEST['current_category'])) {
-//     change_location('/?category='.$_REQUEST['current_category']);
-// } else {
-//     change_location('/');
-// }
-
+if (isset($_REQUEST['current_category'])) {
+    change_location('/?category='.$_REQUEST['current_category']);
+} else {
+    change_location('/');
+}
 ?>

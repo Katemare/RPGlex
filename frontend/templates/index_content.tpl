@@ -41,10 +41,14 @@ Sort by:
                     </td>
                 {/foreach}
             {/if}
-            <td><input type="button" value="Edit" onclick="show_hide('term_{$term_id}_edit_container');" /></td>
+            <!--<td><input type="button" value="Edit" onclick="show_hide('term_{$term_id}_edit_container');" /></td>
             <td><input type="button" value="Comments" onclick="show_hide_comments({$term_id}, 'term_{$term_id}_comments_container');" /> </td>
             <td><input type="button" value="Variants" onclick="show_hide_variants({$term_id}, 'term_{$term_id}_variants_container');"/> </td>
-            <td><input type="button" value="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>
+            <td><input type="button" value="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>-->
+            <td><img src="/frontend/templates/images/edit.png" alt="Edit" onclick="show_hide('term_{$term_id}_edit_container');" /></td>
+            <td><img src="/frontend/templates/images/comments.png" alt="Comments" onclick="show_hide_comments({$term_id}, 'term_{$term_id}_comments_container');" /> </td>
+            <td><img src="/frontend/templates/images/variants.png" alt="Variants" onclick="show_hide_variants({$term_id}, 'term_{$term_id}_variants_container');"/> </td>
+            <td><img src="/frontend/templates/images/delete.png" alt="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>
         </tr>
         <tr class="term_form">            
             <td colspan="{7 + $span}" class="term_form"> 

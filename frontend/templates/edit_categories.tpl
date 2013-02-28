@@ -2,9 +2,12 @@
     {foreach from=$cats item=category key=category_id}
     <div class="category_edit_block">
         <form class="inline_form" action="/edit_category" method="post">
-            <input type="text" name="name" value="{$category.name}" />
-            <input type="hidden" name="id" value="{$category_id}" />
-            <input type="submit" name="edit_category_submit" value="Edit category" />
+            <table>                
+                <tr><td><input type="text" name="name" value="{$category.name}" /></td></tr>
+                <tr><td><input type="hidden" name="id" value="{$category_id}" /></td></tr>
+                <tr><td><textarea name="description" width="400" height="200">{$category.description}</textarea></td></tr>
+                <tr><td><input type="submit" name="edit_category_submit" value="Edit category" /></td></tr>
+            </table>
         </form> 
         {if isset($category.fields) }
             {foreach from=$category.fields item=field}

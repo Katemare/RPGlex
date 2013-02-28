@@ -1,5 +1,5 @@
 <div class="content">
-<div>
+<div id="sort_by_block">
 {if isset($current_category)} {$category_link = "category=$current_category&"} {else} {$category_link = ''} {/if}
 Sort by: 
 <a href="/?{$category_link}sort=english">English names</a>
@@ -10,6 +10,10 @@ Sort by:
 {foreach from=$terms item=category key=category_id}
     <table>
         <caption>{$category.category_name}</caption>
+        {if isset($category.fields)} {assign var=span value=count($category.fields)} {else} {assign var=span value=0} {/if}
+        <tr><td colspan="{7 + $span}" class="description_field">
+            {$category.category_description|replace:"\n":'<br/>'}
+        </td></tr>
         <tr>
             <th> Enlgish </th>
             <th> Russian </th>
@@ -42,8 +46,7 @@ Sort by:
             <td><input type="button" value="Variants" onclick="show_hide_variants({$term_id}, 'term_{$term_id}_variants_container');"/> </td>
             <td><input type="button" value="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>
         </tr>
-        <tr class="term_form">
-            {if isset($category.fields)} {assign var=span value=count($category.fields)} {else} {assign var=span value=0} {/if}
+        <tr class="term_form">            
             <td colspan="{7 + $span}" class="term_form"> 
                 <div id="term_{$term_id}_comments_container" style="display:none"></div>
                 <div id="term_{$term_id}_variants_container" style="display:none"></div>

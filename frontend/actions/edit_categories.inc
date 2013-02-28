@@ -1,9 +1,10 @@
 <?php
 
-    $cats = $database->select_from_table(array('id', 'name'), 'term_categories', array());
+    $cats = $database->select_from_table(array('id', 'name', 'description'), 'term_categories', array());
     $categories = array();
     foreach($cats as $cat) {
         $categories[$cat['id']]['name'] = $cat['name'];
+        $categories[$cat['id']]['description'] = $cat['description'];
     }
     $fields = $database->select_from_table(array('id', 'category_id', 'name'), 'category_fields', array());
     foreach($fields as $field) {

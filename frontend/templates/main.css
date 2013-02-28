@@ -28,13 +28,22 @@ th {
 }
 
 #category_links {
-    display: inline;
-    float: left;
+    display: block;
+/*     float: left; */
 /*     height: 10000px; */
 }
 
+#sort_by_block {
+    margin-left: 100px;
+    margin-top: 25px;
+}
+
+ul {
+    display:inline;
+}
+
 .content {
-    display: inline;
+    display: block;
 }
 
 .display_category_block {
@@ -43,7 +52,7 @@ th {
 }
 
 .edit_category_link {
-    margin-top: 15px;
+    margin-left: 15px;
 }
 
 .row-odd {
@@ -59,8 +68,13 @@ th {
 }
 
 .category_edit_block {
-    margin:15px
+    margin:50px
 }
+
+textarea {
+    width: 300px;
+}
+
 
 .category_field {
     margin-left:25px
@@ -71,4 +85,8 @@ th {
     border-color: white;
     padding:0;
     margin:0;
+}
+
+.description_field {
+    padding-left: 50px;
 }

@@ -18,9 +18,10 @@ if(!empty($record)) {
 //retrieve existing categories from database and set into template engine
 $categories = $database->select_from_table(array('id', 'name'), 'term_categories', array());
 $TemplateEngine->assign('categories', $categories);
-if(isset($_REQUEST['category'])) {
-    $TemplateEngine->assign('current_category', $_REQUEST['category']);
+if (empty($_REQUEST['category'])) {
+    $_REQUEST['category'] = 1;
 }
+$TemplateEngine->assign('current_category', $_REQUEST['category']);
 
 $terms = array();
 $sortby = '';
@@ -29,10 +30,11 @@ if (empty($_REQUEST['sort'])) {
 } else {
     $sortby = escape($_REQUEST['sort']);
 }
-if (isset($_REQUEST['category'])) {
-    $cats = $database->select_from_table(array('id', 'name'), 'term_categories', array('id' => $_REQUEST['category']));
+if ($_REQUEST['category'] != -1) {
+    $cats = $database->select_from_table(array('id', 'name', 'description'), 'term_categories', array('id' => $_REQUEST['category']));
     $cat_id = $cats[0]['id'];
     $terms[$cat_id]['category_name'] = $cats[0]['name'];
+    $terms[$cat_id]['category_description'] = $cats[0]['description'];
     $cats_fields = $database->select_from_table(array('id', 'name'), 'category_fields', array('category_id' => $cats[0]['id']));
     $terms[$cat_id]['fields'] = $cats_fields;
     $termslist = $database->select_from_table(array('id', 'english', 'russian','page'), 'terms', array('category_id' => $cat_id), $sortby);
@@ -51,7 +53,7 @@ if (isset($_REQUEST['category'])) {
         $terms[$cat_id]['terms'][$field['term_id']]['fields'][$field['cat_field_id']] = $field['value'];
     }
 } else {
-    $categories = $database->select_from_table(array('id', 'name'), 'term_categories', array());
+    $categories = $database->select_from_table(array('id', 'name', 'description'), 'term_categories', array());
     $all_terms  = $database->select_from_table(array('id', 'category_id', 'english', 'russian', 'page'), 'terms', array(), $sortby);
     $cat_fields = $database->select_from_table(array('id', 'category_id', 'name'), 'category_fields', array());
     $sql = 'SELECT term_fields.field_id as field_id, term_fields.term_id as term_id, '
@@ -60,6 +62,7 @@ if (isset($_REQUEST['category'])) {
     $term_fields = $database->exec_query($sql);
     foreach($categories as $category) {
         $terms[$category['id']]['category_name'] = $category['name'];
+        $terms[$category['id']]['category_description'] = $category['description'];
     }
     foreach($cat_fields as $cat_field) {
         $terms[$cat_field['category_id']]['fields'][] = array('id' => $cat_field['id'], 'name' => $cat_field['name']);

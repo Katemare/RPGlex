@@ -42,9 +42,9 @@ Sort by:
             <td><input type="button" value="Variants" onclick="show_hide_variants({$term_id}, 'term_{$term_id}_variants_container');"/> </td>
             <td><input type="button" value="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>
         </tr>
-        <tr>
+        <tr class="term_form">
             {if isset($category.fields)} {assign var=span value=count($category.fields)} {else} {assign var=span value=0} {/if}
-            <td colspan="{7 + $span}" > 
+            <td colspan="{7 + $span}" class="term_form"> 
                 <div id="term_{$term_id}_comments_container" style="display:none"></div>
                 <div id="term_{$term_id}_variants_container" style="display:none"></div>
                 <div id="term_{$term_id}_edit_container" style="display:none">

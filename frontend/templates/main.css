@@ -8,6 +8,10 @@ table > caption {
     font-weight:bold;
 }
 
+td > table > caption {
+    font-size:12pt;
+}
+
 table {
 /*     width: 100%; */
 /*     word-break: break-all; */
@@ -38,6 +42,10 @@ th {
     padding: 10px;
 }
 
+.edit_category_link {
+    margin-top: 15px;
+}
+
 .row-odd {
     background-color: white;
 }
@@ -56,4 +64,11 @@ th {
 
 .category_field {
     margin-left:25px
+}
+
+.term_form {
+    background-color: #FDFFBF;
+    border-color: white;
+    padding:0;
+    margin:0;
 }

@@ -10,6 +10,6 @@
             {if isset($current_category) && $category.id ==$current_category} </b> {/if}
             </li>
         {/foreach}
-        <li><i><a href="/edit_categories">Edit categories</a></i></li>
+        <li class="edit_category_link"><i><a href="/edit_categories">Edit categories</a></i></li>
     </ul>
 </div>

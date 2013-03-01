@@ -17,6 +17,11 @@
             }
         }
         
+        public function id()
+        {
+            return $this->user_id;
+        }
+        
         public function isLogged() 
         {
             return $this->user_id != -1;            
@@ -68,7 +73,8 @@
             $user_data = array();
             if (!empty($id)) {
                 $user_data = $this->db->select_from_table(array('salt'), 'users',
-                                                      array('id' => $id))[0];
+                                                      array('id' => $id));
+                $user_data = $user_data[0];
             } else {
                 $user_data['salt'] = rand();
             }

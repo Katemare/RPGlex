@@ -83,7 +83,7 @@ if (empty($path) || $path == 'index' || $path == '/') {
     $TemplateEngine->assign('terms', $terms);
 }
 
-$TemplateEngine->smarty()->assign_by_ref('users', $users);
+$TemplateEngine->smarty()->assignByRef('users', $users);
 
 
 if (isset($_REQUEST['category'])) {

@@ -1,6 +1,6 @@
 <div>
 {if $users->isLogged()}
-    Welcome, {$users->username()} <a href="/logout"> logout </a>
+    Welcome, {$users->username()} <a href="/profile">Change password</a> <a href="/logout"> logout </a> 
 {else}
     <form action="/login" method="post">
         <label> Username: <input type="text" name="username" /> </label>

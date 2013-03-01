@@ -1,3 +1,4 @@
+{if $users->isLogged()}
 <div>
     {foreach from=$cats item=category key=category_id}
     <div class="category_edit_block">
@@ -35,3 +36,4 @@
         <input type="submit" name="add_category_submit" value="Add category" />
     </form>
 </div>
+{/if}

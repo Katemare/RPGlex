@@ -2,7 +2,8 @@
 header('Content-Type: text/html; charset=utf-8');
 define('PATH_ROOT', $_SERVER['DOCUMENT_ROOT'].'/');
 define('SMARTY_DIR', PATH_ROOT.'smarty/');
-require_once SMARTY_DIR.'Smarty.class.php';
+// require_once SMARTY_DIR.'Smarty.class.php';
+require_once SMARTY_DIR.'SmartyBC.class.php';
 require_once PATH_ROOT.'tools/template_engine.inc';
 
 $path = $_REQUEST['request_path'];

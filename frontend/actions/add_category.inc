@@ -1,6 +1,6 @@
 <?php
 
-    if (isset($_REQUEST['add_category_submit'])) {
+    if (isset($_REQUEST['add_category_submit']) && $users->isLogged()) {
         $value = array();
         $value[] = $_REQUEST['text'];
         $database->insert_into_table('term_categories', array('name'), $value);

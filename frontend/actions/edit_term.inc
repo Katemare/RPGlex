@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_REQUEST['edit_term_submit'])) {
+if (isset($_REQUEST['edit_term_submit']) && $users->isLogged()) {
     $database->save_record_into_table(
                 array (
                     'english' => $_REQUEST['english'],

@@ -2,7 +2,7 @@
 
 var_dump($_REQUEST); 
 
-if (isset($_REQUEST['add_term_submit'])) {
+if (isset($_REQUEST['add_term_submit']) && $users->isLogged()) {
     $database->insert_into_table( 'terms',
         array('english', 'russian', 'page', 'category_id'),
         array($_REQUEST['english'], $_REQUEST['russian'], $_REQUEST['page'], $_REQUEST['current_category'])

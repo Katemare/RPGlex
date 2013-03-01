@@ -10,7 +10,7 @@
          */
         public function __construct ($entrance_point) {
             $this->_entrance_point = $entrance_point;
-            $this->_smarty = new Smarty;
+            $this->_smarty = new SmartyBC;
             
             $this->setTemplate('head', 'head.tpl');
             $this->setTemplate('header', 'header.tpl');

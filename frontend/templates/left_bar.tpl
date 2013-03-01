@@ -10,6 +10,8 @@
             {if isset($current_category) && $category.id ==$current_category} </b> {/if}
             </ul>
         {/foreach}
+        {if $users->isLogged()}
         <ul class="edit_category_link"><i><a href="/edit_categories">Edit categories</a></i></ul>
+        {/if}
     </ul>
 </div>

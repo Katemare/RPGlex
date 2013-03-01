@@ -11,7 +11,8 @@ Sort by:
     <table>
         <caption>{$category.category_name}</caption>
         {if isset($category.fields)} {assign var=span value=count($category.fields)} {else} {assign var=span value=0} {/if}
-        <tr><td colspan="{7 + $span}" class="description_field">
+        {if $users->isLogged()} {$span = $span + 2} {/if}
+        <tr><td colspan="{5 + $span}" class="description_field">
             {$category.category_description|replace:"\n":'<br/>'}
         </td></tr>
         <tr>
@@ -41,19 +42,21 @@ Sort by:
                     </td>
                 {/foreach}
             {/if}
-            <!--<td><input type="button" value="Edit" onclick="show_hide('term_{$term_id}_edit_container');" /></td>
-            <td><input type="button" value="Comments" onclick="show_hide_comments({$term_id}, 'term_{$term_id}_comments_container');" /> </td>
-            <td><input type="button" value="Variants" onclick="show_hide_variants({$term_id}, 'term_{$term_id}_variants_container');"/> </td>
-            <td><input type="button" value="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>-->
+            {if $users->isLogged()}
             <td><img src="/frontend/templates/images/edit.png" alt="Edit" onclick="show_hide('term_{$term_id}_edit_container');" /></td>
+            {/if}
             <td><img src="/frontend/templates/images/comments.png" alt="Comments" onclick="show_hide_comments({$term_id}, 'term_{$term_id}_comments_container');" /> </td>
             <td><img src="/frontend/templates/images/variants.png" alt="Variants" onclick="show_hide_variants({$term_id}, 'term_{$term_id}_variants_container');"/> </td>
+            {if $users->isLogged()}
             <td><img src="/frontend/templates/images/delete.png" alt="Delete" onclick="ajax('/delete_term?id={$term_id}');window.location.reload()"/> </td>
+            {/if}
+            
         </tr>
         <tr class="term_form">            
-            <td colspan="{7 + $span}" class="term_form"> 
+            <td colspan="{5 + $span}" class="term_form"> 
                 <div id="term_{$term_id}_comments_container" style="display:none"></div>
                 <div id="term_{$term_id}_variants_container" style="display:none"></div>
+                {if $users->isLogged()}
                 <div id="term_{$term_id}_edit_container" style="display:none">
                     <form action="/edit_term" method="post">
                         <table>
@@ -72,11 +75,13 @@ Sort by:
                         </table>
                     </form>
                 </div>
+                {/if}
             </td>
         </tr>
         {/foreach}
         {/if}
     </table>
+        {if $users->isLogged()}
         <input type="button" value="Add new term" onclick="$('#add_category_form_{$category_id}').css('display', 'block');$(this).css('display', 'none');" />
         <form id="add_category_form_{$category_id}" action="/add_term" method="post" style="display:none" >
             <table>
@@ -92,6 +97,7 @@ Sort by:
                 <tr><td><input type="submit" name="add_term_submit" value="Add new term" /> </td></tr>
             </table>
         </form>
+        {/if}
 {/foreach}
 </div>
 </div>
